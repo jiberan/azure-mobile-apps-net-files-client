@@ -41,21 +41,21 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.2.0.0-rc\lib\net45\Microsoft.WindowsAzure.Mobile.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.2.0.0\lib\net45\Microsoft.WindowsAzure.Mobile.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.2.0.0.0.Fakes">
       <HintPath>FakesAssemblies\Microsoft.WindowsAzure.Mobile.2.0.0.0.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Ext, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.2.0.0-rc\lib\net45\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.Azure.Mobile.Client.2.0.0\lib\net45\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Mobile.Files.Fakes">
       <HintPath>FakesAssemblies\Microsoft.WindowsAzure.Mobile.Files.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -99,7 +99,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <Fakes Include="Fakes\Microsoft.WindowsAzure.Mobile.fakes" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="UnitTests\Operations\" />
