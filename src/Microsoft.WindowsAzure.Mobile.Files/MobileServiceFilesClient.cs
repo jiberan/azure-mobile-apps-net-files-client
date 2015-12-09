@@ -60,7 +60,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 
         public async Task DeleteFileAsync(MobileServiceFileMetadata metadata)
         {
-            string route = string.Format("/tables/{0}/{1}/MobileServiceFiles/{2}", metadata.ParentDataItemType, metadata.ParentDataItemId, metadata.FileName);
+            string route = string.Format("/tables/{0}/{1}/MobileServiceFiles/{2}/", metadata.ParentDataItemType, metadata.ParentDataItemId, metadata.FileName);
 
             var parameters = new Dictionary<string, string>();
             if (metadata.FileStoreUri != null)
