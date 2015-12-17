@@ -173,13 +173,11 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
                 }
             }
 
-            // This is an example of how this would be handled. VERY simple logic right now... 
             var fileMetadata = await this.metadataStore.GetMetadataAsync(tableName, itemId);
             var deletedItemsMetadata = fileMetadata.Where(m => !files.Any(f => string.Compare(f.Id, m.FileId) == 0));
 
             foreach (var metadata in deletedItemsMetadata)
             {
-                //var pendingOperation = this.operations.FirstOrDefault(o=>string.Compare(o.FileId, metadata.FileId) == 0);
                 IMobileServiceFileOperation pendingOperation = await this.operationsQueue.GetOperationByFileIdAsync(metadata.FileId);
 
                 // TODO: Need to call into the sync handler for conflict resolution here...
