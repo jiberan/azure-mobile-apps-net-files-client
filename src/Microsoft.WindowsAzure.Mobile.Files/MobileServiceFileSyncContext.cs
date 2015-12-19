@@ -27,9 +27,10 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
         private readonly IFileSyncHandler syncHandler;
         private readonly IMobileServiceEventManager eventManager;
         private bool disposed = false;
-        private IDisposable changeNotificationSubscription;
+        private readonly IList<IFileSyncTrigger> triggers;
 
-        public MobileServiceFileSyncContext(IMobileServiceClient client, IFileMetadataStore metadataStore, IFileOperationQueue operationsQueue, IFileSyncHandler syncHandler)
+        public MobileServiceFileSyncContext(IMobileServiceClient client, IFileMetadataStore metadataStore, IFileOperationQueue operationsQueue, 
+            IFileSyncTriggerFactory syncTriggerFactory, IFileSyncHandler syncHandler)
         {
             if (client == null)
             {
@@ -55,37 +56,15 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
             this.syncHandler = syncHandler;
             this.operationsQueue = operationsQueue;
             this.mobileServiceFilesClient = new MobileServiceFilesClient(client, new AzureBlobStorageProvider(client));
-
             this.eventManager = client.EventManager;
-            this.changeNotificationSubscription = this.eventManager.Subscribe<StoreOperationCompletedEvent>(OnStoreOperationCompleted);
+            this.triggers = syncTriggerFactory.CreateTriggers(this);
         }
 
-        private void OnStoreOperationCompleted(StoreOperationCompletedEvent storeOperationEvent)
-        {
-            switch (storeOperationEvent.Operation.Kind)
-            {
-                case LocalStoreOperationKind.Insert:
-                case LocalStoreOperationKind.Update:
-                case LocalStoreOperationKind.Upsert:
-                    if (storeOperationEvent.Operation.Source == StoreOperationSource.ServerPull 
-                        || storeOperationEvent.Operation.Source == StoreOperationSource.ServerPush)
-                    {
-                        PullFilesAsync(storeOperationEvent.Operation.TableName, storeOperationEvent.Operation.RecordId);
-                    }
-                    break;
-                case LocalStoreOperationKind.Delete:
-                    this.metadataStore.PurgeAsync(storeOperationEvent.Operation.TableName, storeOperationEvent.Operation.RecordId);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        internal async Task NotifyFileOperationCompletion(MobileServiceFile file, FileOperationKind fileOperationKind, FileOperationSource source)
+        internal void NotifyFileOperationCompletion(MobileServiceFile file, FileOperationKind fileOperationKind, FileOperationSource source)
         {
             var operationCompletedEvent = new FileOperationCompletedEvent(file, fileOperationKind, source);
 
-            await this.eventManager.PublishAsync(operationCompletedEvent);
+            this.eventManager.PublishAsync(operationCompletedEvent).ContinueWith(t => t.Exception.Handle(e => true), TaskContinuationOptions.OnlyOnFaulted);
         }
 
         public async Task AddFileAsync(MobileServiceFile file)
@@ -173,13 +152,11 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
                 }
             }
 
-            // This is an example of how this would be handled. VERY simple logic right now... 
             var fileMetadata = await this.metadataStore.GetMetadataAsync(tableName, itemId);
             var deletedItemsMetadata = fileMetadata.Where(m => !files.Any(f => string.Compare(f.Id, m.FileId) == 0));
 
             foreach (var metadata in deletedItemsMetadata)
             {
-                //var pendingOperation = this.operations.FirstOrDefault(o=>string.Compare(o.FileId, metadata.FileId) == 0);
                 IMobileServiceFileOperation pendingOperation = await this.operationsQueue.GetOperationByFileIdAsync(metadata.FileId);
 
                 // TODO: Need to call into the sync handler for conflict resolution here...
@@ -248,9 +225,9 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
         {
             if (!disposed)
             {
-                if (disposing)
+                foreach (var trigger in triggers.OfType<IDisposable>())
                 {
-                    this.changeNotificationSubscription.Dispose();
+                    trigger.Dispose();
                 }
 
                 disposed = true;
