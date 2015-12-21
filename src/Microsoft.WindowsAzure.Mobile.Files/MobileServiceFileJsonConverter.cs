@@ -1,4 +1,8 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿// ---------------------------------------------------------------------------- 
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// ----------------------------------------------------------------------------
+
+using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json;
 using System;
