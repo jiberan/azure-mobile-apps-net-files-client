@@ -33,8 +33,13 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
         private bool disposed = false;
         private readonly IList<IFileSyncTrigger> triggers;
 
-        public MobileServiceFileSyncContext(IMobileServiceClient client, IFileMetadataStore metadataStore, IFileOperationQueue operationsQueue, 
+        public MobileServiceFileSyncContext(IMobileServiceClient client, IFileMetadataStore metadataStore, IFileOperationQueue operationsQueue,
             IFileSyncTriggerFactory syncTriggerFactory, IFileSyncHandler syncHandler)
+            : this(client, metadataStore, operationsQueue, syncTriggerFactory, syncHandler, null)
+        { }
+
+        internal MobileServiceFileSyncContext(IMobileServiceClient client, IFileMetadataStore metadataStore, IFileOperationQueue operationsQueue, 
+            IFileSyncTriggerFactory syncTriggerFactory, IFileSyncHandler syncHandler, IMobileServiceFilesClient filesClient)
         {
             if (client == null)
             {
@@ -51,6 +56,11 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
                 throw new ArgumentNullException("operationsQueue");
             }
 
+            if (syncTriggerFactory == null)
+            {
+                throw new ArgumentNullException("syncTriggerFactory");
+            }
+
             if (syncHandler == null)
             {
                 throw new ArgumentNullException("syncHandler");
@@ -59,7 +69,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
             this.metadataStore = metadataStore;
             this.syncHandler = syncHandler;
             this.operationsQueue = operationsQueue;
-            this.mobileServiceFilesClient = new MobileServiceFilesClient(client, new AzureBlobStorageProvider(client));
+            this.mobileServiceFilesClient = filesClient ?? new MobileServiceFilesClient(client, new AzureBlobStorageProvider(client));
             this.eventManager = client.EventManager;
             this.triggers = syncTriggerFactory.CreateTriggers(this);
         }
@@ -86,7 +96,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 
             await metadataStore.CreateOrUpdateAsync(metadata);
 
-            var operation = new CreateMobileServiceFileOperation(file.Id);
+            var operation = new CreateMobileServiceFileOperation(Guid.NewGuid().ToString(), file.Id);
 
             await QueueOperationAsync(operation);
 
@@ -95,7 +105,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 
         public async Task DeleteFileAsync(MobileServiceFile file)
         {
-            var operation = new DeleteMobileServiceFileOperation(file.Id);
+            var operation = new DeleteMobileServiceFileOperation(Guid.NewGuid().ToString(), file.Id);
 
             await QueueOperationAsync(operation);
 
@@ -114,7 +124,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
                     // This would also take the cancellation token
                     await operation.Execute(this.metadataStore, this);
 
-                    await operationsQueue.RemoveAsync(operation.FileId);
+                    await operationsQueue.RemoveAsync(operation.Id);
                 }
             }
             finally
@@ -135,7 +145,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 
                 if (metadata == null)
                 {
-                    syncAction = FileSynchronizationAction.Update;
+                    syncAction = FileSynchronizationAction.Create;
 
                     metadata = MobileServiceFileMetadata.FromFile(file);
 
@@ -183,15 +193,15 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 
             try
             {
-                var pendingItemOperations = await this.operationsQueue.GetOperationByFileIdAsync(operation.FileId);
+                var pendingItemOperation = await this.operationsQueue.GetOperationByFileIdAsync(operation.FileId);
 
-                if (pendingItemOperations != null)
+                if (pendingItemOperation != null)
                 {
-                    pendingItemOperations.OnQueueingNewOperation(operation);
+                    pendingItemOperation.OnQueueingNewOperation(operation);
 
-                    if (pendingItemOperations.State == FileOperationState.Cancelled)
+                    if (pendingItemOperation.State == FileOperationState.Cancelled)
                     {
-                        await this.operationsQueue.DequeueAsync();
+                        await this.operationsQueue.RemoveAsync(pendingItemOperation.Id);
                     }
                 }
 

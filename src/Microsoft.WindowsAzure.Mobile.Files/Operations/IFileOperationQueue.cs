@@ -18,7 +18,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
 
         Task<IMobileServiceFileOperation> DequeueAsync();
 
-        Task RemoveAsync(string fileId);
+        Task RemoveAsync(string id);
 
         Task<IMobileServiceFileOperation> GetOperationByFileIdAsync(string fileId);
 

@@ -16,8 +16,8 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
 {
     public sealed class DeleteMobileServiceFileOperation : MobileServiceFileOperation
     {
-        public DeleteMobileServiceFileOperation(string fileId)
-            : base(fileId)
+        public DeleteMobileServiceFileOperation(string id, string fileId)
+            : base(id, fileId)
         {
         }
 

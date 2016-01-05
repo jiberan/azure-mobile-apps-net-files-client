@@ -112,7 +112,9 @@
     <Compile Include="Scenarios\MobileServiceFileSyncContext\DeleteFileScenario.cs" />
     <Compile Include="Scenarios\MobileServiceFileSyncContext\AddNewFileScenario.cs" />
     <Compile Include="Scenarios\MobileServiceFileSyncContext\MobileServiceFileSyncContextScenario.cs" />
+    <Compile Include="Scenarios\MobileServiceFileSyncContext\PullFilesScenario.cs" />
     <Compile Include="Scenarios\MobileServiceFileSyncContext\PushChangesScenario.cs" />
+    <Compile Include="UnitTests\MobileServiceFileSyncContextTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Microsoft.WindowsAzure.Mobile.Files\Microsoft.WindowsAzure.Mobile.Files.csproj">
@@ -130,9 +132,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UnitTests\Operations\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

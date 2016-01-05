@@ -15,37 +15,39 @@ namespace Microsoft.WindowsAzure.Mobile.Files.Test.Scenarios
 {
     public abstract class MobileServiceFileSyncContextScenario
     {
-        private readonly Mock<IFileMetadataStore> fileMetadataStore;
-        private readonly Mock<IFileOperationQueue> fileOperationsQueue;
         private readonly Mock<IMobileServiceClient> mobileServiceClientMock;
-        private readonly Mock<IFileSyncHandler> syncHandler;
+        
         private readonly Mock<IFileSyncTriggerFactory> triggerFactory;
-        private readonly MobileServiceFileSyncContext syncContext;
-        private readonly Mock<IMobileServiceEventManager> eventManager;
 
         public MobileServiceFileSyncContextScenario()
         {
             this.mobileServiceClientMock = new Mock<IMobileServiceClient>();
-            this.fileMetadataStore = new Mock<IFileMetadataStore>();
-            this.fileOperationsQueue = new Mock<IFileOperationQueue>();
             this.triggerFactory = new Mock<IFileSyncTriggerFactory>();
-            this.syncHandler = new Mock<IFileSyncHandler>();
-            this.eventManager = new Mock<IMobileServiceEventManager>();
 
+            SyncHandlerMock = new Mock<IFileSyncHandler>();
+            FileMetadataStoreMock = new Mock<IFileMetadataStore>();
+            FileOperationQueueMock = new Mock<IFileOperationQueue>();
+            FilesClientMock = new Mock<IMobileServiceFilesClient>();
+
+            EventManagerMock = new Mock<IMobileServiceEventManager>();
+            
             this.mobileServiceClientMock.Setup(m => m.EventManager)
-                .Returns(this.eventManager.Object);
+                .Returns(EventManagerMock.Object);
 
-            this.syncContext = new MobileServiceFileSyncContext(mobileServiceClientMock.Object, fileMetadataStore.Object,
-                fileOperationsQueue.Object, triggerFactory.Object, syncHandler.Object);
-
+            SyncContext = new MobileServiceFileSyncContext(mobileServiceClientMock.Object, FileMetadataStoreMock.Object,
+                FileOperationQueueMock.Object, triggerFactory.Object, SyncHandlerMock.Object, FilesClientMock.Object);
         }
 
-        public Mock<IFileOperationQueue> FileOperationQueueMock => fileOperationsQueue;
+        public Mock<IFileOperationQueue> FileOperationQueueMock { get; }
 
-        public Mock<IMobileServiceEventManager> EventManagerMock => eventManager;
+        public Mock<IMobileServiceEventManager> EventManagerMock { get; }
 
-        public Mock<IFileMetadataStore> FileMetadataStoreMock => fileMetadataStore;
+        public Mock<IFileMetadataStore> FileMetadataStoreMock { get; }
 
-        public MobileServiceFileSyncContext SyncContext => syncContext;
+        public MobileServiceFileSyncContext SyncContext { get; }
+
+        public Mock<IMobileServiceFilesClient> FilesClientMock { get; }
+
+        public Mock<IFileSyncHandler> SyncHandlerMock { get; }
     }
 }

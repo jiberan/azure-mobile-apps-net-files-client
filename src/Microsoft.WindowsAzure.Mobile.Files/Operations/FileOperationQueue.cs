@@ -92,10 +92,10 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
             Interlocked.Decrement(ref operationsInfo.Count);
         }
 
-        public async Task RemoveAsync(string fileId)
+        public async Task RemoveAsync(string id)
         {
             var query = new MobileServiceTableQueryDescription(FileOperationTableName);
-            query.Filter = new BinaryOperatorNode(BinaryOperatorKind.Equal, new MemberAccessNode(null, "fileId"), new ConstantNode(fileId));
+            query.Filter = new BinaryOperatorNode(BinaryOperatorKind.Equal, new MemberAccessNode(null, MobileServiceSystemColumns.Id), new ConstantNode(id));
             query.Top = 1;
 
             await Delete(query);
@@ -131,7 +131,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
             var operationItem = new FileOperationItem
             {
                 FileId = operation.FileId,
-                Id = Guid.NewGuid().ToString(),
+                Id = operation.Id,
                 Kind = operation.Kind,
                 Sequence = Interlocked.Increment(ref operationsInfo.Sequence)
             };
@@ -169,11 +169,11 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
                 switch (Kind)
                 {
                     case FileOperationKind.Create:
-                        return new CreateMobileServiceFileOperation(FileId);
+                        return new CreateMobileServiceFileOperation(Id, FileId);
                     case FileOperationKind.Update:
-                        return new UpdateMobileServiceFileOperation(FileId);
+                        return new UpdateMobileServiceFileOperation(Id, FileId);
                     case FileOperationKind.Delete:
-                        return new DeleteMobileServiceFileOperation(FileId);
+                        return new DeleteMobileServiceFileOperation(Id, FileId);
                     default:
                         throw new NotSupportedException("Unsupported file operation kind.");
                 }
