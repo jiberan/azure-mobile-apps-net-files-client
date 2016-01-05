@@ -244,7 +244,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
         }
     }
 
-    internal static class FileSynchronizationActionException
+    internal static class FileSynchronizationActionExtensions
     {
         public static FileOperationKind ToFileOperationKind(this FileSynchronizationAction synchronizationAction)
         {
