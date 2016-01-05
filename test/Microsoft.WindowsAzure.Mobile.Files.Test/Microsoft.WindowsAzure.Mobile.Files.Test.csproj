@@ -123,11 +123,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Fakes Include="Fakes\Microsoft.WindowsAzure.Mobile.Files.fakes" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
-    <Fakes Include="Fakes\Microsoft.WindowsAzure.Mobile.fakes" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

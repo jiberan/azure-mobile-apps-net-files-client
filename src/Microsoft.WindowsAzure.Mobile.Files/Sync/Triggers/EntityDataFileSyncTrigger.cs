@@ -7,7 +7,7 @@ using Microsoft.WindowsAzure.MobileServices.Files.Eventing;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 using Newtonsoft.Json.Linq;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files.Sync.EntityData
+namespace Microsoft.WindowsAzure.MobileServices.Files.Sync.Triggers
 {
     public sealed class EntityDataFileSyncTrigger : IFileSyncTrigger, IDisposable
     {

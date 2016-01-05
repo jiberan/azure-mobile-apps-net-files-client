@@ -5,16 +5,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Reflection;
-using Microsoft.WindowsAzure.MobileServices;
-using Microsoft.WindowsAzure.MobileServices.Files;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using System.IO;
-using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-using System.Net.Http;
-using System.Threading;
+using Microsoft.WindowsAzure.MobileServices.Files.StorageProviders;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files
 {

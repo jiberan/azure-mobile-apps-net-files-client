@@ -3,22 +3,17 @@
 // ----------------------------------------------------------------------------
 
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.MobileServices.Eventing;
 using Microsoft.WindowsAzure.MobileServices.Files.Eventing;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using Microsoft.WindowsAzure.MobileServices.Files.Operations;
+using Microsoft.WindowsAzure.MobileServices.Files.StorageProviders;
 using Microsoft.WindowsAzure.MobileServices.Files.Sync;
-using Microsoft.WindowsAzure.MobileServices.Sync;
-using Newtonsoft.Json.Linq;
+using Microsoft.WindowsAzure.MobileServices.Files.Sync.Triggers;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files
 {

@@ -4,14 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
+namespace Microsoft.WindowsAzure.MobileServices.Files.Sync.Triggers
 {
-    public interface IMobileServiceFileDataSource
+    public interface IFileSyncTriggerFactory
     {
-        Task<Stream> GetStream();
+        IList<IFileSyncTrigger> CreateTriggers(IFileSyncContext fileSyncContext);
     }
 }

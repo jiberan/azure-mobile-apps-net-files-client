@@ -7,11 +7,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+using Microsoft.WindowsAzure.MobileServices.Files.StorageProviders;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files
 {

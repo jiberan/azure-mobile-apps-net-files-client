@@ -37,11 +37,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AzureBlobStorageProvider.cs" />
+    <Compile Include="StorageProviders\AzureBlobStorageProvider.cs" />
     <Compile Include="Eventing\FileOperationCompletedEvent.cs" />
     <Compile Include="Eventing\FileOperationSource.cs" />
     <Compile Include="IMobileServiceFilesClient.cs" />
-    <Compile Include="IStorageProvider.cs" />
+    <Compile Include="StorageProviders\IStorageProvider.cs" />
     <Compile Include="MD5.cs" />
     <Compile Include="FileLocation.cs" />
     <Compile Include="IFileSyncContext.cs" />
@@ -53,8 +53,8 @@
     <Compile Include="MobileServiceFile.cs" />
     <Compile Include="MobileServiceFileJsonConverter.cs" />
     <Compile Include="MobileServiceFilesClient.cs" />
-    <Compile Include="MobileServiceFileSyncContext.cs" />
-    <Compile Include="MobileServiceSyncTableExtensions.cs" />
+    <Compile Include="Sync\MobileServiceFileSyncContext.cs" />
+    <Compile Include="Sync\MobileServiceSyncTableExtensions.cs" />
     <Compile Include="MobileServiceTableExtensions.cs" />
     <Compile Include="Operations\CreateMobileServiceFileOperation.cs" />
     <Compile Include="Operations\DeleteMobileServiceFileOperation.cs" />
@@ -71,12 +71,12 @@
     <Compile Include="StorageTokenRequest.cs" />
     <Compile Include="StorageTokenScope.cs" />
     <Compile Include="StreamMobileServiceDataSource.cs" />
-    <Compile Include="Sync\DefaultFileSyncTriggerFactory.cs" />
-    <Compile Include="Sync\EntityData\EntityDataFileSyncTrigger.cs" />
+    <Compile Include="Sync\Triggers\DefaultFileSyncTriggerFactory.cs" />
+    <Compile Include="Sync\Triggers\EntityDataFileSyncTrigger.cs" />
     <Compile Include="Sync\IFileSyncHandler.cs" />
-    <Compile Include="Sync\IFileSyncTriggerFactory.cs" />
-    <Compile Include="Sync\IMobileServiceFileDataSource.cs" />
-    <Compile Include="Sync\IFileSyncTrigger.cs" />
+    <Compile Include="Sync\Triggers\IFileSyncTriggerFactory.cs" />
+    <Compile Include="IMobileServiceFileDataSource.cs" />
+    <Compile Include="Sync\Triggers\IFileSyncTrigger.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

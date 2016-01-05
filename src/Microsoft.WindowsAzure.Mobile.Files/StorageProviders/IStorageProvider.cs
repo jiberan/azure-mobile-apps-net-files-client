@@ -5,11 +5,9 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices.Files;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-using Microsoft.WindowsAzure.MobileServices.Files.Sync;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files
+namespace Microsoft.WindowsAzure.MobileServices.Files.StorageProviders
 {
     public interface IStorageProvider
     {
