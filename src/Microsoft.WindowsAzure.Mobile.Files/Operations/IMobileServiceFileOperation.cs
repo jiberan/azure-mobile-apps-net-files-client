@@ -12,6 +12,8 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 {
     public interface IMobileServiceFileOperation
     {
+        string Id { get; }
+
         string FileId { get; }
 
         FileOperationKind Kind { get; }

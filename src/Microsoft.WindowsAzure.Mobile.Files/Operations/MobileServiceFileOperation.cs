@@ -13,17 +13,25 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 {
     public abstract class MobileServiceFileOperation : IMobileServiceFileOperation
     {
-        private string fileId;
-
-        public MobileServiceFileOperation(string fileId)
+        public MobileServiceFileOperation(string id, string fileId)
         {
-            this.fileId = fileId;
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (fileId == null)
+            {
+                throw new ArgumentNullException(nameof(fileId));
+            }
+
+            Id = id;
+            FileId = fileId;
         }
 
-        public string FileId
-        {
-            get { return this.fileId; }
-        }
+        public string Id { get; }
+
+        public string FileId { get; }
 
         public FileOperationState State { get; protected set; }
 

@@ -13,8 +13,8 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
 {
     public class UpdateMobileServiceFileOperation : MobileServiceFileOperation
     {
-        public UpdateMobileServiceFileOperation(string fileId)
-            : base(fileId)
+        public UpdateMobileServiceFileOperation(string id, string fileId)
+            : base(id, fileId)
         {
         }
 

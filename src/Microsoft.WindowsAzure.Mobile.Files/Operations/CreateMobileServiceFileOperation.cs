@@ -14,8 +14,8 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
 {
     public class CreateMobileServiceFileOperation : MobileServiceFileOperation
     {
-        public CreateMobileServiceFileOperation(string fileId)
-            : base(fileId)
+        public CreateMobileServiceFileOperation(string id, string fileId)
+            : base(id, fileId)
         {
         }
 
