@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using Microsoft.WindowsAzure.MobileServices.Files.Operations;
 using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+using Microsoft.WindowsAzure.MobileServices.Files.Sync.Triggers;
 using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files

@@ -4,12 +4,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.WindowsAzure.MobileServices.Eventing;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
+namespace Microsoft.WindowsAzure.MobileServices.Files.Sync.Triggers
 {
     internal sealed class DefaultFileSyncTriggerFactory : IFileSyncTriggerFactory
     {
@@ -29,7 +25,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
 
         public IList<IFileSyncTrigger> CreateTriggers(IFileSyncContext fileSyncContext)
         {
-            return new List<IFileSyncTrigger> { new EntityData.EntityDataFileSyncTrigger(fileSyncContext, this.mobileServiceClient, this.autoUpdateRecords) };
+            return new List<IFileSyncTrigger> { new EntityDataFileSyncTrigger(fileSyncContext, this.mobileServiceClient, this.autoUpdateRecords) };
         }
     }
 }

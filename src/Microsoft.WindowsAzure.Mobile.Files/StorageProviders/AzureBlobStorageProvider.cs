@@ -15,7 +15,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files
+namespace Microsoft.WindowsAzure.MobileServices.Files.StorageProviders
 {
     public class AzureBlobStorageProvider : IStorageProvider
     {

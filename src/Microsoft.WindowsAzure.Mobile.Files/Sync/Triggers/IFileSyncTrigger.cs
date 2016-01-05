@@ -8,10 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
+namespace Microsoft.WindowsAzure.MobileServices.Files.Sync.Triggers
 {
-    public interface IFileSyncTriggerFactory
+    public interface IFileSyncTrigger
     {
-        IList<IFileSyncTrigger> CreateTriggers(IFileSyncContext fileSyncContext);
     }
 }
