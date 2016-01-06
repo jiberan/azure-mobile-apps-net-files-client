@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Sign)' == 'Sign' ">
+    <DefineConstants>TRACE;Sign</DefineConstants>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="StorageProviders\AzureBlobStorageProvider.cs" />
     <Compile Include="Eventing\FileOperationCompletedEvent.cs" />
