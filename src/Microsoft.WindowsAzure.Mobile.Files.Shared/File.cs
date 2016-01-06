@@ -16,7 +16,7 @@ namespace Microsoft.WindowsAzure.Mobile.Files.IO
 {
     internal static class File
     {
-#if __IOS__ || __ANDROID__
+#if __IOS__ || __ANDROID__ || DOTNET
         public static Task<Stream> CreateAsync(string targetPath)
         {
             return Task.FromResult<Stream>(System.IO.File.Create(targetPath));
