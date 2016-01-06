@@ -37,15 +37,6 @@
     <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\Xamarin.Shared\MobileServiceSyncTableExtensions.cs">
-      <Link>MobileServiceSyncTableExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Shared\MobileServiceTableExtensions.cs">
-      <Link>MobileServiceTableExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Shared\PathMobileServiceFileDataSource.cs">
-      <Link>PathMobileServiceFileDataSource.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +98,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <Import Project="..\Microsoft.WindowsAzure.Mobile.Files.Shared\Microsoft.WindowsAzure.Mobile.Files.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

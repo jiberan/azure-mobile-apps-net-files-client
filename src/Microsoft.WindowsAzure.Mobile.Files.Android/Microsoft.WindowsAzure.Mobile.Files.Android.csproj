@@ -83,12 +83,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Xamarin.Shared\MobileServiceSyncTableExtensions.cs">
-      <Link>MobileServiceSyncTableExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\Xamarin.Shared\PathMobileServiceFileDataSource.cs">
-      <Link>PathMobileServiceFileDataSource.cs</Link>
-    </Compile>
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -110,6 +104,7 @@
       <Name>Microsoft.WindowsAzure.Mobile.Files</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\Microsoft.WindowsAzure.Mobile.Files.Shared\Microsoft.WindowsAzure.Mobile.Files.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">

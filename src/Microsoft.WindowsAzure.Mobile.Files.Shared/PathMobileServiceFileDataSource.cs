@@ -4,9 +4,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
+using IO = System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Mobile.Files.IO;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
 {
@@ -19,9 +20,9 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
             this.filePath = filePath;
         }
 
-        public Task<Stream> GetStream()
+        public Task<IO.Stream> GetStream()
         {
-            return Task.FromResult<Stream>(File.OpenRead(filePath));
+            return File.OpenReadAsync(filePath);
         }
     }
 }
