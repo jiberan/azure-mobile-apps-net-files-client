@@ -2,9 +2,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ----------------------------------------------------------------------------
 
-using System.IO;
+using IO = System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Mobile.Files.IO;
 using Microsoft.WindowsAzure.MobileServices.Files.Sync;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files
@@ -36,7 +37,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
         /// <returns>A <see cref="Task"/> that completes when the download has finished.</returns>
         public async static Task DownloadFileAsync<T>(this IMobileServiceTable<T> table, MobileServiceFile file, string targetPath)
         {
-            using (Stream stream = File.Create(targetPath))
+            using (IO.Stream stream = await File.CreateAsync(targetPath))
             {
                 await table.DownloadFileToStreamAsync(file, stream);
             }

@@ -2,8 +2,9 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ----------------------------------------------------------------------------
 
-using System.IO;
+using IO = System.IO;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.Mobile.Files.IO;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using Microsoft.WindowsAzure.MobileServices.Files.Sync;
 using Microsoft.WindowsAzure.MobileServices.Sync;
@@ -25,7 +26,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
 
         public async static Task DownloadFileAsync<T>(this IMobileServiceSyncTable<T> table, MobileServiceFile file, string targetPath)
         {
-            using (Stream stream = File.Create(targetPath))
+            using (IO.Stream stream = await File.CreateAsync(targetPath))
             {
                 IFileSyncContext context = table.MobileServiceClient.GetFileSyncContext();
 
