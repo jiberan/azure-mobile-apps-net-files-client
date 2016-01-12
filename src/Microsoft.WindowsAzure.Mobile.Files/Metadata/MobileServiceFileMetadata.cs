@@ -56,7 +56,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Metadata
             };
         }
 
-        internal IDictionary<string, string> GetMetadataAsDictionary()
+        internal IDictionary<string, string> ToDictionary()
         {
             if (this.Metadata == null)
             {

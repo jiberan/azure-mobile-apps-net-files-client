@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
-using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+using Microsoft.WindowsAzure.MobileServices.Files.Operations;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files
+namespace Microsoft.WindowsAzure.MobileServices.Files.Sync
 {
     public interface IFileSyncContext
     {

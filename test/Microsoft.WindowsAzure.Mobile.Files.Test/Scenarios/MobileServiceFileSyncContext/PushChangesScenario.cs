@@ -6,6 +6,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices.Files;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
+using Microsoft.WindowsAzure.MobileServices.Files.Operations;
+using Microsoft.WindowsAzure.MobileServices.Files.Sync;
 using Moq;
 using Xunit;
 

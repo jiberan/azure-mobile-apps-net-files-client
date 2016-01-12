@@ -16,11 +16,8 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Metadata
 
         public Task CreateOrUpdateAsync(MobileServiceFileMetadata metadata)
         {
-
-
             if (this.metadataCollection.Any(m => string.Compare(m.FileId, metadata.FileId) == 0))
             {
-                // Ignore this for now.... 
                 this.metadataCollection.Remove(metadata);
             }
 

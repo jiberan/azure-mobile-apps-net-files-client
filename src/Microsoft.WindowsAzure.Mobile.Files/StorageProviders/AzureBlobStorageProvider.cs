@@ -14,6 +14,7 @@ using Microsoft.WindowsAzure.MobileServices.Files.Sync;
 using Microsoft.WindowsAzure.MobileServices;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
+using Microsoft.WindowsAzure.MobileServices.Files.Identity;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files.StorageProviders
 {

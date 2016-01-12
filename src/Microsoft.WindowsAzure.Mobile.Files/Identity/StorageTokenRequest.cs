@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Microsoft.WindowsAzure.MobileServices.Files
+namespace Microsoft.WindowsAzure.MobileServices.Files.Identity
 {
     public class StorageTokenRequest
     {
