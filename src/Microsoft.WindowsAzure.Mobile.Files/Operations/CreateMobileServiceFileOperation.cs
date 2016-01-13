@@ -45,6 +45,4 @@ namespace Microsoft.WindowsAzure.MobileServices.Files.Operations
         {
         }
     }
-
-
 }

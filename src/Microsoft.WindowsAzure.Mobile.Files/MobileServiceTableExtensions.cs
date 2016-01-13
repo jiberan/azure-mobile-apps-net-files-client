@@ -4,12 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Reflection;
-using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices.Files.Identity;
+using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using Microsoft.WindowsAzure.MobileServices.Files.StorageProviders;
+using Microsoft.WindowsAzure.MobileServices.Files.Sync;
 
 namespace Microsoft.WindowsAzure.MobileServices.Files
 {

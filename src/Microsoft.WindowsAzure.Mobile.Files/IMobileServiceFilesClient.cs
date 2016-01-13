@@ -6,8 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices.Files.Identity;
 using Microsoft.WindowsAzure.MobileServices.Files.Metadata;
 using Microsoft.WindowsAzure.MobileServices.Files.Sync;
+
 namespace Microsoft.WindowsAzure.MobileServices.Files
 {
     public interface IMobileServiceFilesClient

@@ -84,7 +84,7 @@ namespace Microsoft.WindowsAzure.MobileServices.Files
             file.ContentMD5 = metadata.ContentMD5;
             file.LastModified = metadata.LastModified;
             file.Length = metadata.Length;
-            file.Metadata = metadata.GetMetadataAsDictionary();
+            file.Metadata = metadata.ToDictionary();
             return file;
         }
     }
